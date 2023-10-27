@@ -7,7 +7,7 @@ const isMonth = async(req, res, nxt) => {
     let month = req.params.month;
     const user = await auth.findOne({_id:s});
 
-    if(user.month.includes(month) ){
+    if(user.month.includes(month) || user.admin ==='true'){
         nxt();
     }else{
         return res.sendStatus(404);

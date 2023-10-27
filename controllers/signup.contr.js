@@ -35,7 +35,6 @@ const postInfo = async (req, res) => {
 };
 const login = async (req, res) => {
   try {
-    console.log(req.body)
     if(req.body.loginOnline != "ارسال البيانات"){
 
       const student = await modelsign.findOne({
@@ -59,7 +58,6 @@ const login = async (req, res) => {
       } else {
         req.flash("loginError", "cardNumber or phoneNumber is not correct");
         res.redirect("/login");
-        console.log("err1");
 
       }
     } else {
@@ -94,7 +92,6 @@ const login = async (req, res) => {
   }
 }   
   } catch (err) {
-    console.log("err"+err);
     res.send(err);
   }
 };
@@ -111,7 +108,6 @@ const removeStudnet = async (req, res) => {
     await modelsign.findOneAndRemove({ _id: req.params.cardNumber });
     res.redirect("/student");
   } catch (err) {
-    console.log(err)
     return res.sendStatus(400);
   }
 };

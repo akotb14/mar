@@ -1,7 +1,7 @@
 const Unit = require("../models/unit");
 const month = require("../models/month");
 const quiz = require("../models/quiz");
-const user = require('../models/user');
+const user = require("../models/user");
 const degree = require("../models/degreeQuiz.js");
 
 const jwt = require("jsonwebtoken");
@@ -11,24 +11,22 @@ const getData = async (req, res) => {
     let edu = req.params.edu;
     let student = "";
     let grd = req.params.grd;
-    console.log(edu + grd);
 
     if (req.cookies.student) {
       student = jwt.verify(req.cookies.student, process.env.SecretPassword);
     }
     const findMonth = await month.find({ educetionlevel: edu, grade: grd });
-    const getmonthofuser = await user.findOne({_id:student.studentCard});
-    console.log(getmonthofuser)
+    const getmonthofuser = await user.findOne({ _id: student.studentCard });
     res.render("month.ejs", {
       data: findMonth,
       edu: edu,
       grd: grd,
-      month: getmonthofuser['month'],
+      admin: getmonthofuser["admin"],
+      month: getmonthofuser["month"],
       student: student,
       name: req.cookies.student,
     });
   } catch (e) {
-    console.log(e);
 
     res.sendStatus(404);
   }
@@ -36,7 +34,7 @@ const getData = async (req, res) => {
 
 const addlesson = async (req, res) => {
   try {
-    let pdf = req.file? req.file.path : "";
+    let pdf = req.file ? req.file.path : "";
     await Unit.addlesson(
       req.body.educetionlevel,
 
@@ -48,7 +46,7 @@ const addlesson = async (req, res) => {
 
       req.body.lesson,
 
-      pdf 
+      pdf
     );
     const checkMonth = await month.findOne({
       educetionlevel: req.body.educetionlevel,
@@ -66,7 +64,6 @@ const addlesson = async (req, res) => {
 
     res.redirect("/lesson");
   } catch (err) {
-    console.log(err)
     res.sendStatus(400);
   }
 };
@@ -79,7 +76,6 @@ const getlesson = async (req, res) => {
       lesson: lesson,
     });
   } catch (err) {
-    console.log(err);
 
     res.sendStatus(404);
   }

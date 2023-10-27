@@ -225,7 +225,6 @@ const getOpenQuiz = async (req, res) => {
         student: deName.studentCard,
         type: "exam",
       });
-      console.log("dddd" + degree);
       data = await model.find({
         educetionlevel: deName.educetionlevel,
         grade: deName.grade,
@@ -238,7 +237,6 @@ const getOpenQuiz = async (req, res) => {
     res.render("openExam.ejs", {
       quizzes: data,
       dateNow: dateNow,
-
       degree: degree,
     });
   } catch (err) {

@@ -106,10 +106,9 @@ TemplateMo 562 Space Dynamic
           </div>
 
           <div class="blog-wrapper">
-            <% for(i of data){%> 
-              <% if(month.includes(i.month) && month != undefined){%> 
-            <% if(student.educetionlevel ==
-            i.educetionlevel && student.grade == i.grade) {%>
+        <% for(i of data){%> 
+          <% if((month.includes(i.month) && month != undefined) || (admin =='true')){%> 
+            <% if((student.educetionlevel == i.educetionlevel && student.grade == i.grade) || (admin =='true')) {%>
             <div class="blog-wrap">
               <div class="blog-card">
                 <div
@@ -123,7 +122,7 @@ TemplateMo 562 Space Dynamic
 
                   <div class="blog-content">
                     <div class="blog-info">
-                      <h5 class="blog-date">2023</h5>
+                      <h5 class="blog-date">2024</h5>
                     </div>
                     <h3 class="title-sm"><%=i.month%></h3>
                     <p class="blog-text"></p>
@@ -202,7 +201,7 @@ TemplateMo 562 Space Dynamic
             data-wow-delay="0.25s"
           >
             <p>
-              © Copyright 2022. All Rights Reserved.
+              © Copyright 2024. All Rights Reserved.
 
               <br />Developed By:
               <a
@@ -211,7 +210,7 @@ TemplateMo 562 Space Dynamic
                 >Abdelrahman</a
               >
               &
-              <a rel="nofollow" href="https://www.facebook.com/ahmed11mahomed">
+              <a rel="nofollow" href="https://www.linkedin.com/in/ahmed-mohamed-040712211">
                 Kotb</a
               >
             </p>

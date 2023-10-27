@@ -76,7 +76,6 @@ const user = require("./models/user");
 async function writeUsers(){
   fs.readFile("degree.json" ,'utf8', (err , data)=>{
     let data1 = JSON.parse(data);
-    console.log(data1[0]['_id']);
     for(let i=0; i<data1.length; i++){
       data1[i]['_id'] = {$oid:data1[i]['_id']}; 
       
@@ -111,7 +110,6 @@ app.get('/',(req, res) => {
 	let deName;
     if (req.cookies.student) {
       deName = jwt.verify(req.cookies.student, process.env.SecretPassword);
-      console.log(deName);
     } else {
       deName = "";
     }
@@ -121,11 +119,10 @@ app.get('/',(req, res) => {
     }
   res.render('index.ejs',{name:deName.nameStudent, isAdmin: isAdmin});
  }catch(e){
-	 console.log(e);
+  res.json({error:e.message});
  }
  })
 app.get("/logout", (req, res) => {
-  console.log("ahmed");
   res.clearCookie("student");
   res.redirect("/");
 });
@@ -153,7 +150,6 @@ app.get("/student", isAdmin, async (req, res) => {
         .where({ cardNumber: { $ne: 123456789101122 } }),
     });
   } catch (err) {
-    console.log(err);
     res.sendStatus(400);
   }
 });
